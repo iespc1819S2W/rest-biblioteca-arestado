@@ -2,7 +2,7 @@
 
 | Ruta | Mètode | Url | Descripció | Responsable |
 |--|--|--|--|--|
-| llibres | GET | /llibres | Llegir tots els llibres | X |
+| llibres | GET | /llibres | Llegir tots els llibres | AYOUB | 
 | llibre | GET | /llibres/{id} | Llegir un llibre a partir de la clau primària | X |
 | llibre | GET | /llibres/{id}/where={condició}&order={ordre} | Llegir un llibre amb filtres i ordenació | X |
 | llibre | POST | /llibres | Alta d’un llibre. | X |
