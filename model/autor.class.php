@@ -35,7 +35,21 @@ class Autor
     
     public function get($id)
     {
-        //TODO
+        try
+        {
+            $stm = $this->conn->prepare("SELECT id_aut, nom_aut,fk_nacionalitat FROM autors WHERE id_aut = :id");
+            $stm->bindValue(':id', $id);
+            $stm->execute();
+            $result = $stm->fetchObject('Autor');
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
     }
 
     
