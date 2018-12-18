@@ -31,6 +31,8 @@ class llibre {
             return $this->resposta;
 		}
     }
+
+    
 }
 
 ?>
