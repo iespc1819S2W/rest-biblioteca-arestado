@@ -87,7 +87,24 @@ class Autor
     
     public function update($data)
     {
-        // TODO
+        try
+        {
+            $nom_aut = $data['nom_aut'];
+            $fk_nacionalitat = $data['fk_nacionalitat'];
+            $sql = "UPDATE AUTORS SET NOM_AUT = ':nom', FK_NACIONALITAT = ':fk_nacionalitat' WHERE ID_AUT = :id";
+            $stm=$this->conn->prepare($sql);
+            $stm->bindValue(':nom', $nom_aut);
+            $stm->bindValue(':fk_nacionalitat',!empty($fk_nacionalitat)?$fk_nacionalitat:NULL,PDO::PARAM_STR);
+            $stm->execute();
+        
+            $this->resposta->setCorrecta(true);
+            return $this->resposta;
+        }
+        catch (Exception $e) 
+        {
+            $this->resposta->setCorrecta(false, "Error actualitzant: " . $e->getMessage());
+            return $this->resposta;
+        } 
     }
 
     
