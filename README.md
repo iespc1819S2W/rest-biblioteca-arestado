@@ -22,9 +22,8 @@
 `git push origin dev`
 
 # Configuració inicial
-Agafam el contingut de la branca **dev** que es on farem feina.
-`git pull origin dev`
-Ens crearà la branca **dev**. Ara ens movem a aquesta branca.
-`git checkout -b dev`
-
-I ara ja estam llestos per a treballar.
+- Agafam el contingut de la branca **dev** que es on farem feina.
+- `git pull origin dev`
+- Ens crearà la branca **dev**. Ara ens movem a aquesta branca.
+- `git checkout -b dev`
+- I ara ja estam llestos per a treballar.
