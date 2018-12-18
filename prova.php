@@ -17,3 +17,4 @@ $base = __DIR__;
     error_log($res->missatge,3,"$base/log/errors.log");  // Error per noltros
  }   
 
+?>
