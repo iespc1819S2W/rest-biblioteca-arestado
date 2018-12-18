@@ -14,7 +14,8 @@ class llibre {
         $this->resposta = new Resposta();
     }
 
-    public function getAll($orderby="ID_LLIB"){
+    public function getAll($orderby="ID_LLIB")
+    {
 		try{
 			$result = array();                        
             $stm = $this->conn->prepare("SELECT id_llib,titol,numedicio,llocedicio,anyedicio,descrip_llib,isbn FROM llibres ORDER BY :orderby");
@@ -30,6 +31,53 @@ class llibre {
 			$this->resposta->setCorrecta(false, $e->getMessage());
             return $this->resposta;
 		}
+    } 
+        
+    public function getOne($id)
+    {
+        // TODO
+        
+    }
+
+    public function filter($where, $orderby) 
+    {
+        // TODO
+
+    }
+
+    public function create()
+    {
+        // TODO
+
+    }
+
+    public function update($id)
+    {
+
+        // TODO
+    }
+
+    public function delete($id)
+    {
+        // TODO
+
+    }
+
+    public function getAutors($id)
+    {
+
+        // TODO
+    }
+
+    public function assignAutor($idLlibre, $idAutor)
+    {
+        // TODO
+
+    }
+
+    public function unassignAutor($idLlibre, $idAutor)
+    {
+        // TODO
     }
 
     

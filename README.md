@@ -9,5 +9,5 @@
 | llibre | POST | /llibres/{id}/modificar | Modificar un llibre | AYOUB |
 | llibre | POST | /llibres/{id}/borrar | Borrar un llibre | X |
 | autors-llibre | GET | /llibres/{id}/autors | Llegir tots els autors d’un llibre. | Miguel |
-| autors-llibre | POST | /llibres/{id}/autors | Alta d’un nou autor d’un llibre | X |
+| autors-llibre | POST | /llibres/{id}/autors | Alta d’un nou autor d’un llibre | Marta |
 | autors-llibre | POST | /llibres/{id}/autors/{id} | Baixa d’un autor d’un determinat llibre | X |
