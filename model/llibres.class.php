@@ -65,10 +65,25 @@ class llibre {
 
     }
 
-    public function update($id)
+    public function update($id,$valor)
     {
 
-        // TODO
+        try{
+			$result = array();                        
+            $stm = $this->conn->prepare("UPDATE llibres SET titol = '$valor' WHERE id_llib = $id ORDER BY :orderby");
+            $stm->bindValue(':orderby',$orderby);
+			$stm->execute();
+            $tuples=$stm->fetchAll();
+            $this->resposta->setDades($tuples);    
+			$this->resposta->setCorrecta(true);              
+            return $this->resposta;
+        }
+        
+        catch(Exception $e){   
+			$this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
+        
     }
 
     public function delete($id)
@@ -93,6 +108,8 @@ class llibre {
     {
         // TODO
     }
+
+
 }
 
 ?>
