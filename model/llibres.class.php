@@ -35,7 +35,21 @@ class llibre {
         
     public function getOne($id)
     {
-        // TODO
+        try
+        {
+            $stm = $this->conn->prepare("SELECT id_llib,titol,numedicio,llocedicio,anyedicio,descrip_llib,isbn FROM llibres where ID_LLIB = :idLlib");
+            $stm->bindValue(":idLlib",$id);
+            $stm->execute();
+            $result = $stm->fetchObject('llibre');
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
         
     }
 
@@ -208,7 +222,21 @@ class llibre {
 
     public function getAutors($id)
     {
-
+        try
+        {
+            $stm = $this->conn->prepare("SELECT autors.NOM_AUT FROM autors,lli_aut,llibres where llibres.ID_LLIB = :idLlib AND llibres.ID_LLIB = lli_aut.FK_IDLLIB AND autors.ID_AUT = lli_aut.FK_IDAUT");
+            $stm->bindValue(":idLlib",$id);
+            $stm->execute();
+            $result = $stm->fetchAll();
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
         // TODO
     }
 
