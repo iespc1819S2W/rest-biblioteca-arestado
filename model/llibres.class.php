@@ -35,7 +35,21 @@ class llibre {
         
     public function getOne($id)
     {
-        // TODO
+        try
+        {
+            $stm = $this->conn->prepare("SELECT id_llib,titol,numedicio,llocedicio,anyedicio,descrip_llib,isbn FROM llibres where ID_LLIB = :idLlib ORDER BY :idLlib ");
+            $stm->bindValue(":idLlib",$id);
+            $stm->execute();
+            $result = $stm->fetchObject('llibre');
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
         
     }
 
