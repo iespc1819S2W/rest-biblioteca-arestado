@@ -34,8 +34,22 @@ class llibre
 
     public function getOne($id)
     {
-        // TODO
-
+        try
+        {
+            $stm = $this->conn->prepare("SELECT id_llib,titol,numedicio,llocedicio,anyedicio,descrip_llib,isbn FROM llibres where ID_LLIB = :idLlib");
+            $stm->bindValue(":idLlib",$id);
+            $stm->execute();
+            $result = $stm->fetchObject('llibre');
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
+        
     }
 
     public function filter($where, $orderby)
@@ -159,23 +173,153 @@ class llibre
         }
     }
 
-    public function update($id, $valor)
+    public function update($data) 
     {
+        // if ($id = '' || $id = NULL){
+        //     echo "Inserta una ID.";
+        //     $this->resposta->setCorrecta(false);
+        // }else if ($titol = '' || $titol = null){
+        //     echo "Inserta un títol.";
+        // }else if ($num = '' || $num = null){
+        //     echo "Inserta un número de edició.";
+        // } 
 
-        try {
-            $result = array();
-            $stm = $this->conn->prepare("UPDATE llibres SET titol = '$valor' WHERE id_llib = $id ORDER BY :orderby");
-            $stm->bindValue(':orderby', $orderby);
-            $stm->execute();
-            $tuples = $stm->fetchAll();
-            $this->resposta->setDades($tuples);
-            $this->resposta->setCorrecta(true);
-            return $this->resposta;
-        } catch (Exception $e) {
-            $this->resposta->setCorrecta(false, $e->getMessage());
-            return $this->resposta;
-        }
+            // $id = $row[N] +1;
+            // $titol = $data['TITOL'];
+            // $num = $data['NUMEDICIO'];
+            // $lloc = $data['LLOCEDICIO'];
+            // $any = $data['ANYEDICIO'];
+            // $descripcio = $data['DESCRIP_LLIB'];
+            // $isbn = $data['ISBN'];
+            // $desplegal = $data['DEPLEGAL'];
+            // $signtop = $data['SIGNTOP'];
+            // $dbaixa = $data['DATBAIXA_LLIB'];
+            // $motiuBaixa = $data['MOTIUBAIXA'];
+            // $fkdep =$data['FK_DEPARTAMENT'];
+            // $fkcolleccio = $data['FK_COLLECCIO'];
+            // $fkidedit = $data['FK_IDEDIT'];
+            // $fkllengua = $data['FK_LLENGUA']; 
+            // $imgllib = $data['IMG_LLIB'];
 
+            if (isset($data['ID_LLIB'])) {
+                $id = $data['ID_LLIB'];
+            } else {
+                $id = null;
+            }
+
+            if (isset($data['TITOL'])) {
+                $titol = $data['TITOL'];
+            } else {
+                $titol = null;
+            }
+
+            if (isset($data['NUMEDICIO'])) {
+                $num = $data['NUMEDICIO'];
+            } else {
+                $num = null;
+            }
+
+            if (isset($data['LLOCEDICIO'])) {
+                $lloc = $data['LLOCEDICIO'];
+            } else {
+                $lloc = null;
+            }
+
+            if (isset($data['ANYEDICIO'])) {
+                $any = $data['ANYEDICIO'];
+            } else {
+                $any = null;
+            }
+
+            if (isset($data['DESCRIP_LLIB'])) {
+                $descripcio = $data['DESCRIP_LLIB'];
+            } else {
+                $descripcio = null;
+            }
+
+            if (isset($data['ISBN'])) {
+                $isbn = $data['ISBN'];
+            } else {
+                $isbn = null;
+            }
+
+            if (isset($data['DEPLEGAL'])) {
+                $deplegal = $data['DEPLEGAL'];
+            } else {
+                $deplegal = null;
+            }
+
+            if (isset($data['SIGNTOP'])) {
+                $signtop = $data['SIGNTOP'];
+            } else {
+                $signtop = null;
+            }
+
+            if (isset($data['DATBAIXA_LLIB'])) {
+                $dbaixa = $data['DATBAIXA_LLIB'];
+            } else {
+                $dbaixa = null;
+            }
+
+            if (isset($data['MOTIUBAIXA'])) {
+                $motiuBaixa = $data['MOTIUBAIXA'];
+            } else {
+                $motiuBaixa = null;
+            }
+
+            if (isset($data['FK_DEPARTAMENT'])) {
+                $fkdep = $data['FK_DEPARTAMENT'];
+            } else {
+                $fkdep = null;
+            }
+
+            if (isset($data['FK_COLLECCIO'])) {
+                $fkcolleccio = $data['FK_COLLECCIO'];
+            } else {
+                $fkcolleccio = null;
+            }
+
+            if (isset($data['FK_IDEDIT'])) {
+                $fkidedit = $data['FK_IDEDIT'];
+            } else {
+                $fkidedit = null;
+            }
+
+            if (isset($data['FK_LLENGUA'])) {
+                $fkllengua = $data['FK_LLENGUA'];
+            } else {
+                $fkllengua = null;
+            }
+
+            if (isset($data['IMG_LLIB'])) {
+                $imgllib = $data['IMG_LLIB'];
+            } else {
+                $imgllib = null;
+            }
+
+            try{
+                foreach ($data as $key => $llibres) {
+                $result = array();                        
+                $stm = $this->conn->prepare("UPDATE llibres SET titol = '$titol' , numedicio = '$num' , llocedicio = '$lloc' , anyedicio = '$any' ,
+                descrip_llib = '$descripcio' , isbn = '$isbn' , desplegal = '$deplegal' , signtop = '$signtop' , datbaixa_llib = '$dbaixa' ,
+                motiubaixa = '$motiuBaixa' WHERE id_llib = $id ");
+                //$stm->bindValue(':orderby',$orderby);
+                $stm->execute();
+                $tuples=$stm->fetchAll();
+                $this->resposta->setDades($tuples);    
+                $this->resposta->setCorrecta(true);              
+                return $this->resposta;
+
+                }
+            }
+            
+            catch(Exception $e){   
+                $this->resposta->setCorrecta(false, $e->getMessage());
+                return $this->resposta;
+            }
+        
+
+        
     }
 
     public function delete($id)
@@ -186,7 +330,21 @@ class llibre
 
     public function getAutors($id)
     {
-
+        try
+        {
+            $stm = $this->conn->prepare("SELECT autors.NOM_AUT FROM autors,lli_aut,llibres where llibres.ID_LLIB = :idLlib AND llibres.ID_LLIB = lli_aut.FK_IDLLIB AND autors.ID_AUT = lli_aut.FK_IDAUT");
+            $stm->bindValue(":idLlib",$id);
+            $stm->execute();
+            $result = $stm->fetchAll();
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
         // TODO
     }
 
