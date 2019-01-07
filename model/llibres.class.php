@@ -356,7 +356,21 @@ class llibre
 
     public function unassignAutor($idLlibre, $idAutor)
     {
-        // TODO
+        try
+        {
+            $stm = $this->conn->prepare("DELETE FROM lli_aut WHERE FK_IDLLIB = :idllib AND FK_IDAUT = :idaut");
+            $stm->bindValue(":idllib", $idLlibre);
+            $stm->bindValue(":idaut", $idAutor);
+            $stm->execute();
+            $this->resposta->setDades("Eliminat");
+            $this->resposta->setCorrecta(true);
+            return $this->resposta;
+        }
+        catch (Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
     }
 
 
