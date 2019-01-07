@@ -4,12 +4,12 @@
  require_once("$base/model/llibres.class.php");
  $llibre=new llibre();
  $dades = array(
-    array(
       
+      "ID_LLIB" => "9999" ,
       "TITOL" => "Prova Update",
-      "NUMEDICIO" => "9999",
-      "ISBN" => 66666666
-    )
+      "NUMEDICIO" => "55555555555",
+      "ISBN" => 8888
+    
 );
 
  $res=$llibre->update($dades);

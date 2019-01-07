@@ -67,32 +67,6 @@ class llibre {
 
     public function update($data) 
     {
-        // if ($id = '' || $id = NULL){
-        //     echo "Inserta una ID.";
-        //     $this->resposta->setCorrecta(false);
-        // }else if ($titol = '' || $titol = null){
-        //     echo "Inserta un títol.";
-        // }else if ($num = '' || $num = null){
-        //     echo "Inserta un número de edició.";
-        // } 
-
-            // $id = $row[N] +1;
-            // $titol = $data['TITOL'];
-            // $num = $data['NUMEDICIO'];
-            // $lloc = $data['LLOCEDICIO'];
-            // $any = $data['ANYEDICIO'];
-            // $descripcio = $data['DESCRIP_LLIB'];
-            // $isbn = $data['ISBN'];
-            // $desplegal = $data['DEPLEGAL'];
-            // $signtop = $data['SIGNTOP'];
-            // $dbaixa = $data['DATBAIXA_LLIB'];
-            // $motiuBaixa = $data['MOTIUBAIXA'];
-            // $fkdep =$data['FK_DEPARTAMENT'];
-            // $fkcolleccio = $data['FK_COLLECCIO'];
-            // $fkidedit = $data['FK_IDEDIT'];
-            // $fkllengua = $data['FK_LLENGUA']; 
-            // $imgllib = $data['IMG_LLIB'];
-
             if (isset($data['ID_LLIB'])) {
                 $id = $data['ID_LLIB'];
             } else {
@@ -192,13 +166,27 @@ class llibre {
             try{
                 foreach ($data as $key => $llibres) {
                 $result = array();                        
-                $stm = $this->conn->prepare("UPDATE llibres SET titol = '$titol' , numedicio = '$num' , llocedicio = '$lloc' , anyedicio = '$any' ,
-                descrip_llib = '$descripcio' , isbn = '$isbn' , desplegal = '$deplegal' , signtop = '$signtop' , datbaixa_llib = '$dbaixa' ,
-                motiubaixa = '$motiuBaixa' WHERE id_llib = $id ");
-                //$stm->bindValue(':orderby',$orderby);
+                $stm = $this->conn->prepare("UPDATE llibres SET titol = :titol , numedicio = :numedicio , 
+                llocedicio = :llocedicio , anyedicio = :anyedicio ,
+                descrip_llib = :descrip_llib , isbn = :isbn , deplegal = :deplegal , 
+                signtop = :signtop , datbaixa_llib = :datbaixa_llib ,
+                motiubaixa = :motiubaixa  , fk_colleccio = :fk_colleccio  ,
+                img_llib = :img_llib WHERE id_llib = :id_llib ");
+                $stm->bindValue(':titol',$titol);
+                $stm->bindValue(':numedicio',$num);
+                $stm->bindValue(':llocedicio',$lloc);
+                $stm->bindValue(':anyedicio',$any);
+                $stm->bindValue(':descrip_llib',$descripcio);
+                $stm->bindValue(':isbn',$isbn);
+                $stm->bindValue(':deplegal',$deplegal);
+                $stm->bindValue(':signtop',$signtop);
+                $stm->bindValue(':datbaixa_llib',$dbaixa);
+                $stm->bindValue(':motiubaixa',$motiuBaixa);
+                $stm->bindValue(':fk_colleccio',$fkcolleccio);
+                $stm->bindValue(':img_llib',$imgllib);
+                $stm->bindValue(':id_llib',$id);
                 $stm->execute();
-                $tuples=$stm->fetchAll();
-                $this->resposta->setDades($tuples);    
+                    
                 $this->resposta->setCorrecta(true);              
                 return $this->resposta;
 
