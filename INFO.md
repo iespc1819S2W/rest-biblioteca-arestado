@@ -1,5 +1,5 @@
 # Objectius
- - [ ] Llegir tots els llibres. (GET) 
+ - [+] Llegir tots els llibres. (GET) 
  - [ ] Llegir un llibre a partir de la clau primària. (GET) 
  - [ ] Llegir un llibre amb filtres i ordenació (GET) 
  - [ ] Alta d’un llibre. (POST) 
