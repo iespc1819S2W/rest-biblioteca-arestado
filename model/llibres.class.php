@@ -53,9 +53,25 @@ class llibre {
         
     }
 
-    public function filter($where, $orderby) 
+    public function filter($where,$orderby) 
     {
-        // TODO
+        try
+        {
+            $where = "%$where%";
+            $stm = $this->conn->prepare("SELECT id_llib,titol,numedicio,llocedicio,anyedicio,descrip_llib,isbn FROM llibres where ID_LLIB = :parametre or TITOL like :parametre order by $orderby");
+            $stm->bindValue(":parametre",$where);
+            //$stm->bindValue(":ordre",$orderby);
+            $stm->execute();
+            $result = $stm->fetchAll();
+            $this->resposta->setDades($result);
+            $this->resposta->setCorrecta(true);      
+            return $this->resposta;
+        }
+        catch(Exception $e)
+        {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
 
     }
 
