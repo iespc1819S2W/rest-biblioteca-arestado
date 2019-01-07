@@ -6,7 +6,7 @@
 - [x] Modificar un llibre (POST) 
 - [x] Borrar un llibre(POST) 
 - [x] Llegir tots els autors d’un llibre. (GET) 
-- [] Alta d’un nou autor d’un llibre (POST) 
+- [ ] Alta d’un nou autor d’un llibre (POST) 
 - [x] Baixa d’un autor d’un determinat llibre (POST)
 
 
