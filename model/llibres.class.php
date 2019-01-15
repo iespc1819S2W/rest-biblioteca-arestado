@@ -329,8 +329,17 @@ class llibre
     }
 
     public function delete($id)
-    {
-        // TODO
+    { 
+        try {
+            $stm = $this->conn->prepare("delete from llibres where id_llib = :id_llib");
+            $stm->bindValue(':id_llib',(int) $id);            
+            $stm->execute();
+            $this->resposta->setCorrecta(true);
+            return $this->resposta;
+        } catch (Exception $e) {
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
 
     }
 
@@ -356,8 +365,22 @@ class llibre
 
     public function assignAutor($idLlibre, $idAutor)
     {
-        // TODO
-
+        try
+        {
+            $sql = "INSERT INTO LLI_AUT (FK_IDAUT) VALUES (:ID_AUT) WHERE FK_IDLLIB = :ID_LLIB";
+            $stm=$this->conn->prepare($sql);
+            $stm->bindValue(':ID_LLIB', $idLlibre);
+            $stm->bindValue(':ID_AUT', $idAutor);
+            $stm->execute();
+        
+            $this->resposta->setCorrecta(true);
+            return $this->resposta;
+        }
+        catch (Exception $e) 
+        {
+            $this->resposta->setCorrecta(false, "Error assignant: " . $e->getMessage());
+            return $this->resposta;
+        } 
     }
 
     public function unassignAutor($idLlibre, $idAutor)
